@@ -51,9 +51,25 @@ public class ApiServer {
 			System.out.println("transactions/deposite api is called");
 			  TxRequest data = gson.fromJson(req.body(), TxRequest.class);
 			  trxService.deposite(data.accNo, data.amount);
-			  return "{\"message\":\"Deposit successful!\"}";
+			  return "Deposite successfully..!";
 		});
 		
+		
+		//Withdraw API
+		post("/transactions/withdraw",(req, res) ->{
+			System.out.println("/transactions/withdraw api is called");
+			TxRequest data = gson.fromJson(req.body(), TxRequest.class);
+			trxService.withdraw(data.accNo, data.amount);
+			return "Withdraw successfully..!";
+		});
+		
+		post("/transactions/transfer",(req, res) -> {
+			System.out.println("/transactions/tranfer api is called");
+			TransferRequest data = gson.fromJson(req.body(), TransferRequest.class);
+			trxService.tranfer(data.fromAcc, data.toAcc, data.amount);
+			return "Transfer successfully..!";
+			
+		});
 		
 	}
 	
